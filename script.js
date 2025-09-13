@@ -44,7 +44,6 @@ const animals = [
   { name: "Alligator", habitat: "both", img: "aligator.jpg" },
   { name: "Salamander", habitat: "both", img: "salamender.jpg" }
 ];
-
 // Utility: shuffle array
 function shuffleArray(arr) {
   return arr.sort(() => Math.random() - 0.5);
@@ -63,12 +62,32 @@ selectedAnimals.forEach(animal => {
   img.classList.add("animal");
   img.draggable = true;
 
+  // Give safe id
+  img.id = "animal-" + animal.name.replace(/\s+/g, "-").toLowerCase();
+
+  // --- Desktop drag ---
   img.addEventListener("dragstart", e => {
     e.dataTransfer.setData("animal", animal.name);
     e.dataTransfer.setData("id", e.target.id);
   });
 
-  img.id = "animal-" + animal.name;
+  // --- Mobile touch support ---
+  img.addEventListener("touchstart", e => {
+    img.classList.add("dragging");
+  });
+
+  img.addEventListener("touchend", e => {
+    const touch = e.changedTouches[0];
+    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    if (dropTarget && dropTarget.classList.contains("drop-zone")) {
+      answers[animal.name] = dropTarget.dataset.habitat;
+      dropTarget.appendChild(img);
+    }
+
+    img.classList.remove("dragging");
+  });
+
   animalArea.appendChild(img);
 });
 

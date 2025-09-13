@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Habitat Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🐾 Animal Habitat Game</h1>
+  <p>Drag and drop each animal into the correct habitat (Land, Water, or Both).</p>
+
+  <div id="game-container">
+    <div id="animal-area">
+      <!-- Animals will be loaded here dynamically -->
+    </div>
+
+    <div id="drop-zones">
+      <div class="drop-zone" data-habitat="land">🌍 Land</div>
+      <div class="drop-zone" data-habitat="water">🌊 Water</div>
+      <div class="drop-zone" data-habitat="both">🌍+🌊 Both</div>
+    </div>
+  </div>
+
+  <button id="submit-btn">Check Score</button>
+  <p id="result"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
